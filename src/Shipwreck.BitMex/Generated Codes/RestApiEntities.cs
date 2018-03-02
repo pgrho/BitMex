@@ -1,637 +1,1726 @@
 using System;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace Shipwreck.BitMex
 {
+    [DataContract]
     public partial class Announcement
     {
-        public object id { get; set; }
-        public object link { get; set; }
-        public object title { get; set; }
-        public object content { get; set; }
-        public object date { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [DataMember]
+        [JsonProperty("link")]
+        public string Link { get; set; }
+        [DataMember]
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        [DataMember]
+        [JsonProperty("content")]
+        public string Content { get; set; }
+        [DataMember]
+        [JsonProperty("date")]
+        public DateTimeOffset? Date { get; set; }
     }
-    public partial class Error
-    {
-        public object error { get; set; }
-    }
+    [DataContract]
     public partial class APIKey
     {
-        public object id { get; set; }
-        public object secret { get; set; }
-        public object name { get; set; }
-        public object nonce { get; set; }
-        public object cidr { get; set; }
-        public object permissions { get; set; }
-        public object enabled { get; set; }
-        public object userId { get; set; }
-        public object created { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public string Id { get; set; }
+        [DataMember]
+        [JsonProperty("secret")]
+        public string Secret { get; set; }
+        [DataMember]
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [DataMember]
+        [JsonProperty("nonce")]
+        public long Nonce { get; set; }
+        [DataMember]
+        [JsonProperty("cidr")]
+        public string Cidr { get; set; }
+        [DataMember]
+        [JsonProperty("permissions")]
+        public object[] Permissions { get; set; }
+        [DataMember]
+        [JsonProperty("enabled")]
+        public bool Enabled { get; set; }
+        [DataMember]
+        [JsonProperty("userId")]
+        public int UserId { get; set; }
+        [DataMember]
+        [JsonProperty("created")]
+        public DateTimeOffset? Created { get; set; }
     }
+    [DataContract]
     public partial class Chat
     {
-        public object id { get; set; }
-        public object date { get; set; }
-        public object user { get; set; }
-        public object message { get; set; }
-        public object html { get; set; }
-        public object fromBot { get; set; }
-        public object channelID { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+        [DataMember]
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; set; }
+        [DataMember]
+        [JsonProperty("user")]
+        public string User { get; set; }
+        [DataMember]
+        [JsonProperty("message")]
+        public string Message { get; set; }
+        [DataMember]
+        [JsonProperty("html")]
+        public string Html { get; set; }
+        [DataMember]
+        [JsonProperty("fromBot")]
+        public bool FromBot { get; set; }
+        [DataMember]
+        [JsonProperty("channelID")]
+        public double? ChannelID { get; set; }
     }
+    [DataContract]
     public partial class ChatChannel
     {
-        public object id { get; set; }
-        public object name { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+        [DataMember]
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
+    [DataContract]
     public partial class ConnectedUsers
     {
-        public object users { get; set; }
-        public object bots { get; set; }
+        [DataMember]
+        [JsonProperty("users")]
+        public int? Users { get; set; }
+        [DataMember]
+        [JsonProperty("bots")]
+        public int? Bots { get; set; }
     }
+    [DataContract]
     public partial class Execution
     {
-        public object execID { get; set; }
-        public object orderID { get; set; }
-        public object clOrdID { get; set; }
-        public object clOrdLinkID { get; set; }
-        public object account { get; set; }
-        public object symbol { get; set; }
-        public object side { get; set; }
-        public object lastQty { get; set; }
-        public object lastPx { get; set; }
-        public object underlyingLastPx { get; set; }
-        public object lastMkt { get; set; }
-        public object lastLiquidityInd { get; set; }
-        public object simpleOrderQty { get; set; }
-        public object orderQty { get; set; }
-        public object price { get; set; }
-        public object displayQty { get; set; }
-        public object stopPx { get; set; }
-        public object pegOffsetValue { get; set; }
-        public object pegPriceType { get; set; }
-        public object currency { get; set; }
-        public object settlCurrency { get; set; }
-        public object execType { get; set; }
-        public object ordType { get; set; }
-        public object timeInForce { get; set; }
-        public object execInst { get; set; }
-        public object contingencyType { get; set; }
-        public object exDestination { get; set; }
-        public object ordStatus { get; set; }
-        public object triggered { get; set; }
-        public object workingIndicator { get; set; }
-        public object ordRejReason { get; set; }
-        public object simpleLeavesQty { get; set; }
-        public object leavesQty { get; set; }
-        public object simpleCumQty { get; set; }
-        public object cumQty { get; set; }
-        public object avgPx { get; set; }
-        public object commission { get; set; }
-        public object tradePublishIndicator { get; set; }
-        public object multiLegReportingType { get; set; }
-        public object text { get; set; }
-        public object trdMatchID { get; set; }
-        public object execCost { get; set; }
-        public object execComm { get; set; }
-        public object homeNotional { get; set; }
-        public object foreignNotional { get; set; }
-        public object transactTime { get; set; }
-        public object timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("execID")]
+        public Guid ExecID { get; set; }
+        [DataMember]
+        [JsonProperty("orderID")]
+        public Guid? OrderID { get; set; }
+        [DataMember]
+        [JsonProperty("clOrdID")]
+        public string ClOrdID { get; set; }
+        [DataMember]
+        [JsonProperty("clOrdLinkID")]
+        public string ClOrdLinkID { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long? Account { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("side")]
+        public string Side { get; set; }
+        [DataMember]
+        [JsonProperty("lastQty")]
+        public long? LastQty { get; set; }
+        [DataMember]
+        [JsonProperty("lastPx")]
+        public double? LastPx { get; set; }
+        [DataMember]
+        [JsonProperty("underlyingLastPx")]
+        public double? UnderlyingLastPx { get; set; }
+        [DataMember]
+        [JsonProperty("lastMkt")]
+        public string LastMkt { get; set; }
+        [DataMember]
+        [JsonProperty("lastLiquidityInd")]
+        public string LastLiquidityInd { get; set; }
+        [DataMember]
+        [JsonProperty("simpleOrderQty")]
+        public double? SimpleOrderQty { get; set; }
+        [DataMember]
+        [JsonProperty("orderQty")]
+        public long? OrderQty { get; set; }
+        [DataMember]
+        [JsonProperty("price")]
+        public double? Price { get; set; }
+        [DataMember]
+        [JsonProperty("displayQty")]
+        public long? DisplayQty { get; set; }
+        [DataMember]
+        [JsonProperty("stopPx")]
+        public double? StopPx { get; set; }
+        [DataMember]
+        [JsonProperty("pegOffsetValue")]
+        public double? PegOffsetValue { get; set; }
+        [DataMember]
+        [JsonProperty("pegPriceType")]
+        public string PegPriceType { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("settlCurrency")]
+        public string SettlCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("execType")]
+        public string ExecType { get; set; }
+        [DataMember]
+        [JsonProperty("ordType")]
+        public string OrdType { get; set; }
+        [DataMember]
+        [JsonProperty("timeInForce")]
+        public string TimeInForce { get; set; }
+        [DataMember]
+        [JsonProperty("execInst")]
+        public string ExecInst { get; set; }
+        [DataMember]
+        [JsonProperty("contingencyType")]
+        public string ContingencyType { get; set; }
+        [DataMember]
+        [JsonProperty("exDestination")]
+        public string ExDestination { get; set; }
+        [DataMember]
+        [JsonProperty("ordStatus")]
+        public string OrdStatus { get; set; }
+        [DataMember]
+        [JsonProperty("triggered")]
+        public string Triggered { get; set; }
+        [DataMember]
+        [JsonProperty("workingIndicator")]
+        public bool WorkingIndicator { get; set; }
+        [DataMember]
+        [JsonProperty("ordRejReason")]
+        public string OrdRejReason { get; set; }
+        [DataMember]
+        [JsonProperty("simpleLeavesQty")]
+        public double? SimpleLeavesQty { get; set; }
+        [DataMember]
+        [JsonProperty("leavesQty")]
+        public long? LeavesQty { get; set; }
+        [DataMember]
+        [JsonProperty("simpleCumQty")]
+        public double? SimpleCumQty { get; set; }
+        [DataMember]
+        [JsonProperty("cumQty")]
+        public long? CumQty { get; set; }
+        [DataMember]
+        [JsonProperty("avgPx")]
+        public double? AvgPx { get; set; }
+        [DataMember]
+        [JsonProperty("commission")]
+        public double? Commission { get; set; }
+        [DataMember]
+        [JsonProperty("tradePublishIndicator")]
+        public string TradePublishIndicator { get; set; }
+        [DataMember]
+        [JsonProperty("multiLegReportingType")]
+        public string MultiLegReportingType { get; set; }
+        [DataMember]
+        [JsonProperty("text")]
+        public string Text { get; set; }
+        [DataMember]
+        [JsonProperty("trdMatchID")]
+        public Guid? TrdMatchID { get; set; }
+        [DataMember]
+        [JsonProperty("execCost")]
+        public long? ExecCost { get; set; }
+        [DataMember]
+        [JsonProperty("execComm")]
+        public long? ExecComm { get; set; }
+        [DataMember]
+        [JsonProperty("homeNotional")]
+        public double? HomeNotional { get; set; }
+        [DataMember]
+        [JsonProperty("foreignNotional")]
+        public double? ForeignNotional { get; set; }
+        [DataMember]
+        [JsonProperty("transactTime")]
+        public DateTimeOffset? TransactTime { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
     }
+    [DataContract]
     public partial class Funding
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object fundingInterval { get; set; }
-        public object fundingRate { get; set; }
-        public object fundingRateDaily { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("fundingInterval")]
+        public DateTimeOffset? FundingInterval { get; set; }
+        [DataMember]
+        [JsonProperty("fundingRate")]
+        public double? FundingRate { get; set; }
+        [DataMember]
+        [JsonProperty("fundingRateDaily")]
+        public double? FundingRateDaily { get; set; }
     }
+    [DataContract]
     public partial class Instrument
     {
-        public object symbol { get; set; }
-        public object rootSymbol { get; set; }
-        public object state { get; set; }
-        public object typ { get; set; }
-        public object listing { get; set; }
-        public object front { get; set; }
-        public object expiry { get; set; }
-        public object settle { get; set; }
-        public object relistInterval { get; set; }
-        public object inverseLeg { get; set; }
-        public object sellLeg { get; set; }
-        public object buyLeg { get; set; }
-        public object optionStrikePcnt { get; set; }
-        public object optionStrikeRound { get; set; }
-        public object optionStrikePrice { get; set; }
-        public object optionMultiplier { get; set; }
-        public object positionCurrency { get; set; }
-        public object underlying { get; set; }
-        public object quoteCurrency { get; set; }
-        public object underlyingSymbol { get; set; }
-        public object reference { get; set; }
-        public object referenceSymbol { get; set; }
-        public object calcInterval { get; set; }
-        public object publishInterval { get; set; }
-        public object publishTime { get; set; }
-        public object maxOrderQty { get; set; }
-        public object maxPrice { get; set; }
-        public object lotSize { get; set; }
-        public object tickSize { get; set; }
-        public object multiplier { get; set; }
-        public object settlCurrency { get; set; }
-        public object underlyingToPositionMultiplier { get; set; }
-        public object underlyingToSettleMultiplier { get; set; }
-        public object quoteToSettleMultiplier { get; set; }
-        public object isQuanto { get; set; }
-        public object isInverse { get; set; }
-        public object initMargin { get; set; }
-        public object maintMargin { get; set; }
-        public object riskLimit { get; set; }
-        public object riskStep { get; set; }
-        public object limit { get; set; }
-        public object capped { get; set; }
-        public object taxed { get; set; }
-        public object deleverage { get; set; }
-        public object makerFee { get; set; }
-        public object takerFee { get; set; }
-        public object settlementFee { get; set; }
-        public object insuranceFee { get; set; }
-        public object fundingBaseSymbol { get; set; }
-        public object fundingQuoteSymbol { get; set; }
-        public object fundingPremiumSymbol { get; set; }
-        public object fundingTimestamp { get; set; }
-        public object fundingInterval { get; set; }
-        public object fundingRate { get; set; }
-        public object indicativeFundingRate { get; set; }
-        public object rebalanceTimestamp { get; set; }
-        public object rebalanceInterval { get; set; }
-        public object openingTimestamp { get; set; }
-        public object closingTimestamp { get; set; }
-        public object sessionInterval { get; set; }
-        public object prevClosePrice { get; set; }
-        public object limitDownPrice { get; set; }
-        public object limitUpPrice { get; set; }
-        public object bankruptLimitDownPrice { get; set; }
-        public object bankruptLimitUpPrice { get; set; }
-        public object prevTotalVolume { get; set; }
-        public object totalVolume { get; set; }
-        public object volume { get; set; }
-        public object volume24h { get; set; }
-        public object prevTotalTurnover { get; set; }
-        public object totalTurnover { get; set; }
-        public object turnover { get; set; }
-        public object turnover24h { get; set; }
-        public object prevPrice24h { get; set; }
-        public object vwap { get; set; }
-        public object highPrice { get; set; }
-        public object lowPrice { get; set; }
-        public object lastPrice { get; set; }
-        public object lastPriceProtected { get; set; }
-        public object lastTickDirection { get; set; }
-        public object lastChangePcnt { get; set; }
-        public object bidPrice { get; set; }
-        public object midPrice { get; set; }
-        public object askPrice { get; set; }
-        public object impactBidPrice { get; set; }
-        public object impactMidPrice { get; set; }
-        public object impactAskPrice { get; set; }
-        public object hasLiquidity { get; set; }
-        public object openInterest { get; set; }
-        public object openValue { get; set; }
-        public object fairMethod { get; set; }
-        public object fairBasisRate { get; set; }
-        public object fairBasis { get; set; }
-        public object fairPrice { get; set; }
-        public object markMethod { get; set; }
-        public object markPrice { get; set; }
-        public object indicativeTaxRate { get; set; }
-        public object indicativeSettlePrice { get; set; }
-        public object optionUnderlyingPrice { get; set; }
-        public object settledPrice { get; set; }
-        public object timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("rootSymbol")]
+        public string RootSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("state")]
+        public string State { get; set; }
+        [DataMember]
+        [JsonProperty("typ")]
+        public string Typ { get; set; }
+        [DataMember]
+        [JsonProperty("listing")]
+        public DateTimeOffset? Listing { get; set; }
+        [DataMember]
+        [JsonProperty("front")]
+        public DateTimeOffset? Front { get; set; }
+        [DataMember]
+        [JsonProperty("expiry")]
+        public DateTimeOffset? Expiry { get; set; }
+        [DataMember]
+        [JsonProperty("settle")]
+        public DateTimeOffset? Settle { get; set; }
+        [DataMember]
+        [JsonProperty("relistInterval")]
+        public DateTimeOffset? RelistInterval { get; set; }
+        [DataMember]
+        [JsonProperty("inverseLeg")]
+        public string InverseLeg { get; set; }
+        [DataMember]
+        [JsonProperty("sellLeg")]
+        public string SellLeg { get; set; }
+        [DataMember]
+        [JsonProperty("buyLeg")]
+        public string BuyLeg { get; set; }
+        [DataMember]
+        [JsonProperty("positionCurrency")]
+        public string PositionCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("underlying")]
+        public string Underlying { get; set; }
+        [DataMember]
+        [JsonProperty("quoteCurrency")]
+        public string QuoteCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("underlyingSymbol")]
+        public string UnderlyingSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+        [DataMember]
+        [JsonProperty("referenceSymbol")]
+        public string ReferenceSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("calcInterval")]
+        public DateTimeOffset? CalcInterval { get; set; }
+        [DataMember]
+        [JsonProperty("publishInterval")]
+        public DateTimeOffset? PublishInterval { get; set; }
+        [DataMember]
+        [JsonProperty("publishTime")]
+        public DateTimeOffset? PublishTime { get; set; }
+        [DataMember]
+        [JsonProperty("maxOrderQty")]
+        public long? MaxOrderQty { get; set; }
+        [DataMember]
+        [JsonProperty("maxPrice")]
+        public double? MaxPrice { get; set; }
+        [DataMember]
+        [JsonProperty("lotSize")]
+        public long? LotSize { get; set; }
+        [DataMember]
+        [JsonProperty("tickSize")]
+        public double? TickSize { get; set; }
+        [DataMember]
+        [JsonProperty("multiplier")]
+        public long? Multiplier { get; set; }
+        [DataMember]
+        [JsonProperty("settlCurrency")]
+        public string SettlCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("underlyingToPositionMultiplier")]
+        public long? UnderlyingToPositionMultiplier { get; set; }
+        [DataMember]
+        [JsonProperty("underlyingToSettleMultiplier")]
+        public long? UnderlyingToSettleMultiplier { get; set; }
+        [DataMember]
+        [JsonProperty("quoteToSettleMultiplier")]
+        public long? QuoteToSettleMultiplier { get; set; }
+        [DataMember]
+        [JsonProperty("isQuanto")]
+        public bool IsQuanto { get; set; }
+        [DataMember]
+        [JsonProperty("isInverse")]
+        public bool IsInverse { get; set; }
+        [DataMember]
+        [JsonProperty("initMargin")]
+        public double? InitMargin { get; set; }
+        [DataMember]
+        [JsonProperty("maintMargin")]
+        public double? MaintMargin { get; set; }
+        [DataMember]
+        [JsonProperty("riskLimit")]
+        public long? RiskLimit { get; set; }
+        [DataMember]
+        [JsonProperty("riskStep")]
+        public long? RiskStep { get; set; }
+        [DataMember]
+        [JsonProperty("limit")]
+        public double? Limit { get; set; }
+        [DataMember]
+        [JsonProperty("capped")]
+        public bool Capped { get; set; }
+        [DataMember]
+        [JsonProperty("taxed")]
+        public bool Taxed { get; set; }
+        [DataMember]
+        [JsonProperty("deleverage")]
+        public bool Deleverage { get; set; }
+        [DataMember]
+        [JsonProperty("makerFee")]
+        public double? MakerFee { get; set; }
+        [DataMember]
+        [JsonProperty("takerFee")]
+        public double? TakerFee { get; set; }
+        [DataMember]
+        [JsonProperty("settlementFee")]
+        public double? SettlementFee { get; set; }
+        [DataMember]
+        [JsonProperty("insuranceFee")]
+        public double? InsuranceFee { get; set; }
+        [DataMember]
+        [JsonProperty("fundingBaseSymbol")]
+        public string FundingBaseSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("fundingQuoteSymbol")]
+        public string FundingQuoteSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("fundingPremiumSymbol")]
+        public string FundingPremiumSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("fundingTimestamp")]
+        public DateTimeOffset? FundingTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("fundingInterval")]
+        public DateTimeOffset? FundingInterval { get; set; }
+        [DataMember]
+        [JsonProperty("fundingRate")]
+        public double? FundingRate { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeFundingRate")]
+        public double? IndicativeFundingRate { get; set; }
+        [DataMember]
+        [JsonProperty("rebalanceTimestamp")]
+        public DateTimeOffset? RebalanceTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("rebalanceInterval")]
+        public DateTimeOffset? RebalanceInterval { get; set; }
+        [DataMember]
+        [JsonProperty("openingTimestamp")]
+        public DateTimeOffset? OpeningTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("closingTimestamp")]
+        public DateTimeOffset? ClosingTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("sessionInterval")]
+        public DateTimeOffset? SessionInterval { get; set; }
+        [DataMember]
+        [JsonProperty("prevClosePrice")]
+        public double? PrevClosePrice { get; set; }
+        [DataMember]
+        [JsonProperty("limitDownPrice")]
+        public double? LimitDownPrice { get; set; }
+        [DataMember]
+        [JsonProperty("limitUpPrice")]
+        public double? LimitUpPrice { get; set; }
+        [DataMember]
+        [JsonProperty("bankruptLimitDownPrice")]
+        public double? BankruptLimitDownPrice { get; set; }
+        [DataMember]
+        [JsonProperty("bankruptLimitUpPrice")]
+        public double? BankruptLimitUpPrice { get; set; }
+        [DataMember]
+        [JsonProperty("prevTotalVolume")]
+        public long? PrevTotalVolume { get; set; }
+        [DataMember]
+        [JsonProperty("totalVolume")]
+        public long? TotalVolume { get; set; }
+        [DataMember]
+        [JsonProperty("volume")]
+        public long? Volume { get; set; }
+        [DataMember]
+        [JsonProperty("volume24h")]
+        public long? Volume24h { get; set; }
+        [DataMember]
+        [JsonProperty("prevTotalTurnover")]
+        public long? PrevTotalTurnover { get; set; }
+        [DataMember]
+        [JsonProperty("totalTurnover")]
+        public long? TotalTurnover { get; set; }
+        [DataMember]
+        [JsonProperty("turnover")]
+        public long? Turnover { get; set; }
+        [DataMember]
+        [JsonProperty("turnover24h")]
+        public long? Turnover24h { get; set; }
+        [DataMember]
+        [JsonProperty("prevPrice24h")]
+        public double? PrevPrice24h { get; set; }
+        [DataMember]
+        [JsonProperty("vwap")]
+        public double? Vwap { get; set; }
+        [DataMember]
+        [JsonProperty("highPrice")]
+        public double? HighPrice { get; set; }
+        [DataMember]
+        [JsonProperty("lowPrice")]
+        public double? LowPrice { get; set; }
+        [DataMember]
+        [JsonProperty("lastPrice")]
+        public double? LastPrice { get; set; }
+        [DataMember]
+        [JsonProperty("lastPriceProtected")]
+        public double? LastPriceProtected { get; set; }
+        [DataMember]
+        [JsonProperty("lastTickDirection")]
+        public string LastTickDirection { get; set; }
+        [DataMember]
+        [JsonProperty("lastChangePcnt")]
+        public double? LastChangePcnt { get; set; }
+        [DataMember]
+        [JsonProperty("bidPrice")]
+        public double? BidPrice { get; set; }
+        [DataMember]
+        [JsonProperty("midPrice")]
+        public double? MidPrice { get; set; }
+        [DataMember]
+        [JsonProperty("askPrice")]
+        public double? AskPrice { get; set; }
+        [DataMember]
+        [JsonProperty("impactBidPrice")]
+        public double? ImpactBidPrice { get; set; }
+        [DataMember]
+        [JsonProperty("impactMidPrice")]
+        public double? ImpactMidPrice { get; set; }
+        [DataMember]
+        [JsonProperty("impactAskPrice")]
+        public double? ImpactAskPrice { get; set; }
+        [DataMember]
+        [JsonProperty("hasLiquidity")]
+        public bool HasLiquidity { get; set; }
+        [DataMember]
+        [JsonProperty("openInterest")]
+        public long? OpenInterest { get; set; }
+        [DataMember]
+        [JsonProperty("openValue")]
+        public long? OpenValue { get; set; }
+        [DataMember]
+        [JsonProperty("fairMethod")]
+        public string FairMethod { get; set; }
+        [DataMember]
+        [JsonProperty("fairBasisRate")]
+        public double? FairBasisRate { get; set; }
+        [DataMember]
+        [JsonProperty("fairBasis")]
+        public double? FairBasis { get; set; }
+        [DataMember]
+        [JsonProperty("fairPrice")]
+        public double? FairPrice { get; set; }
+        [DataMember]
+        [JsonProperty("markMethod")]
+        public string MarkMethod { get; set; }
+        [DataMember]
+        [JsonProperty("markPrice")]
+        public double? MarkPrice { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeTaxRate")]
+        public double? IndicativeTaxRate { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeSettlePrice")]
+        public double? IndicativeSettlePrice { get; set; }
+        [DataMember]
+        [JsonProperty("settledPrice")]
+        public double? SettledPrice { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
     }
+    [DataContract]
     public partial class InstrumentInterval
     {
-        public object intervals { get; set; }
-        public object symbols { get; set; }
+        [DataMember]
+        [JsonProperty("intervals")]
+        public string[] Intervals { get; set; }
+        [DataMember]
+        [JsonProperty("symbols")]
+        public string[] Symbols { get; set; }
     }
+    [DataContract]
     public partial class IndexComposite
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object indexSymbol { get; set; }
-        public object reference { get; set; }
-        public object lastPrice { get; set; }
-        public object weight { get; set; }
-        public object logged { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("indexSymbol")]
+        public string IndexSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+        [DataMember]
+        [JsonProperty("lastPrice")]
+        public double? LastPrice { get; set; }
+        [DataMember]
+        [JsonProperty("weight")]
+        public double? Weight { get; set; }
+        [DataMember]
+        [JsonProperty("logged")]
+        public DateTimeOffset? Logged { get; set; }
     }
+    [DataContract]
     public partial class Insurance
     {
-        public object currency { get; set; }
-        public object timestamp { get; set; }
-        public object walletBalance { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("walletBalance")]
+        public long? WalletBalance { get; set; }
     }
+    [DataContract]
     public partial class Leaderboard
     {
-        public object name { get; set; }
-        public object isRealName { get; set; }
-        public object profit { get; set; }
+        [DataMember]
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [DataMember]
+        [JsonProperty("isRealName")]
+        public bool IsRealName { get; set; }
+        [DataMember]
+        [JsonProperty("profit")]
+        public double? Profit { get; set; }
     }
+    [DataContract]
     public partial class Liquidation
     {
-        public object orderID { get; set; }
-        public object symbol { get; set; }
-        public object side { get; set; }
-        public object price { get; set; }
-        public object leavesQty { get; set; }
+        [DataMember]
+        [JsonProperty("orderID")]
+        public Guid OrderID { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("side")]
+        public string Side { get; set; }
+        [DataMember]
+        [JsonProperty("price")]
+        public double? Price { get; set; }
+        [DataMember]
+        [JsonProperty("leavesQty")]
+        public long? LeavesQty { get; set; }
     }
+    [DataContract]
     public partial class Notification
     {
-        public object id { get; set; }
-        public object date { get; set; }
-        public object title { get; set; }
-        public object body { get; set; }
-        public object ttl { get; set; }
-        public object type { get; set; }
-        public object closable { get; set; }
-        public object persist { get; set; }
-        public object waitForVisibility { get; set; }
-        public object sound { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+        [DataMember]
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; set; }
+        [DataMember]
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        [DataMember]
+        [JsonProperty("body")]
+        public string Body { get; set; }
+        [DataMember]
+        [JsonProperty("ttl")]
+        public int Ttl { get; set; }
+        [DataMember]
+        [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public NotificationType Type { get; set; }
+        [DataMember]
+        [JsonProperty("closable")]
+        public bool Closable { get; set; }
+        [DataMember]
+        [JsonProperty("persist")]
+        public bool Persist { get; set; }
+        [DataMember]
+        [JsonProperty("waitForVisibility")]
+        public bool WaitForVisibility { get; set; }
+        [DataMember]
+        [JsonProperty("sound")]
+        public string Sound { get; set; }
     }
+    [DataContract]
     public partial class Order
     {
-        public object orderID { get; set; }
-        public object clOrdID { get; set; }
-        public object clOrdLinkID { get; set; }
-        public object account { get; set; }
-        public object symbol { get; set; }
-        public object side { get; set; }
-        public object simpleOrderQty { get; set; }
-        public object orderQty { get; set; }
-        public object price { get; set; }
-        public object displayQty { get; set; }
-        public object stopPx { get; set; }
-        public object pegOffsetValue { get; set; }
-        public object pegPriceType { get; set; }
-        public object currency { get; set; }
-        public object settlCurrency { get; set; }
-        public object ordType { get; set; }
-        public object timeInForce { get; set; }
-        public object execInst { get; set; }
-        public object contingencyType { get; set; }
-        public object exDestination { get; set; }
-        public object ordStatus { get; set; }
-        public object triggered { get; set; }
-        public object workingIndicator { get; set; }
-        public object ordRejReason { get; set; }
-        public object simpleLeavesQty { get; set; }
-        public object leavesQty { get; set; }
-        public object simpleCumQty { get; set; }
-        public object cumQty { get; set; }
-        public object avgPx { get; set; }
-        public object multiLegReportingType { get; set; }
-        public object text { get; set; }
-        public object transactTime { get; set; }
-        public object timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("orderID")]
+        public Guid OrderID { get; set; }
+        [DataMember]
+        [JsonProperty("clOrdID")]
+        public string ClOrdID { get; set; }
+        [DataMember]
+        [JsonProperty("clOrdLinkID")]
+        public string ClOrdLinkID { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long? Account { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("side")]
+        public string Side { get; set; }
+        [DataMember]
+        [JsonProperty("simpleOrderQty")]
+        public double? SimpleOrderQty { get; set; }
+        [DataMember]
+        [JsonProperty("orderQty")]
+        public long? OrderQty { get; set; }
+        [DataMember]
+        [JsonProperty("price")]
+        public double? Price { get; set; }
+        [DataMember]
+        [JsonProperty("displayQty")]
+        public long? DisplayQty { get; set; }
+        [DataMember]
+        [JsonProperty("stopPx")]
+        public double? StopPx { get; set; }
+        [DataMember]
+        [JsonProperty("pegOffsetValue")]
+        public double? PegOffsetValue { get; set; }
+        [DataMember]
+        [JsonProperty("pegPriceType")]
+        public string PegPriceType { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("settlCurrency")]
+        public string SettlCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("ordType")]
+        public string OrdType { get; set; }
+        [DataMember]
+        [JsonProperty("timeInForce")]
+        public string TimeInForce { get; set; }
+        [DataMember]
+        [JsonProperty("execInst")]
+        public string ExecInst { get; set; }
+        [DataMember]
+        [JsonProperty("contingencyType")]
+        public string ContingencyType { get; set; }
+        [DataMember]
+        [JsonProperty("exDestination")]
+        public string ExDestination { get; set; }
+        [DataMember]
+        [JsonProperty("ordStatus")]
+        public string OrdStatus { get; set; }
+        [DataMember]
+        [JsonProperty("triggered")]
+        public string Triggered { get; set; }
+        [DataMember]
+        [JsonProperty("workingIndicator")]
+        public bool WorkingIndicator { get; set; }
+        [DataMember]
+        [JsonProperty("ordRejReason")]
+        public string OrdRejReason { get; set; }
+        [DataMember]
+        [JsonProperty("simpleLeavesQty")]
+        public double? SimpleLeavesQty { get; set; }
+        [DataMember]
+        [JsonProperty("leavesQty")]
+        public long? LeavesQty { get; set; }
+        [DataMember]
+        [JsonProperty("simpleCumQty")]
+        public double? SimpleCumQty { get; set; }
+        [DataMember]
+        [JsonProperty("cumQty")]
+        public long? CumQty { get; set; }
+        [DataMember]
+        [JsonProperty("avgPx")]
+        public double? AvgPx { get; set; }
+        [DataMember]
+        [JsonProperty("multiLegReportingType")]
+        public string MultiLegReportingType { get; set; }
+        [DataMember]
+        [JsonProperty("text")]
+        public string Text { get; set; }
+        [DataMember]
+        [JsonProperty("transactTime")]
+        public DateTimeOffset? TransactTime { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
     }
+    [DataContract]
     public partial class OrderBookL2
     {
-        public object symbol { get; set; }
-        public object id { get; set; }
-        public object side { get; set; }
-        public object size { get; set; }
-        public object price { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public long Id { get; set; }
+        [DataMember]
+        [JsonProperty("side")]
+        public string Side { get; set; }
+        [DataMember]
+        [JsonProperty("size")]
+        public long? Size { get; set; }
+        [DataMember]
+        [JsonProperty("price")]
+        public double? Price { get; set; }
     }
+    [DataContract]
     public partial class Position
     {
-        public object account { get; set; }
-        public object symbol { get; set; }
-        public object currency { get; set; }
-        public object underlying { get; set; }
-        public object quoteCurrency { get; set; }
-        public object commission { get; set; }
-        public object initMarginReq { get; set; }
-        public object maintMarginReq { get; set; }
-        public object riskLimit { get; set; }
-        public object leverage { get; set; }
-        public object crossMargin { get; set; }
-        public object deleveragePercentile { get; set; }
-        public object rebalancedPnl { get; set; }
-        public object prevRealisedPnl { get; set; }
-        public object prevUnrealisedPnl { get; set; }
-        public object prevClosePrice { get; set; }
-        public object openingTimestamp { get; set; }
-        public object openingQty { get; set; }
-        public object openingCost { get; set; }
-        public object openingComm { get; set; }
-        public object openOrderBuyQty { get; set; }
-        public object openOrderBuyCost { get; set; }
-        public object openOrderBuyPremium { get; set; }
-        public object openOrderSellQty { get; set; }
-        public object openOrderSellCost { get; set; }
-        public object openOrderSellPremium { get; set; }
-        public object execBuyQty { get; set; }
-        public object execBuyCost { get; set; }
-        public object execSellQty { get; set; }
-        public object execSellCost { get; set; }
-        public object execQty { get; set; }
-        public object execCost { get; set; }
-        public object execComm { get; set; }
-        public object currentTimestamp { get; set; }
-        public object currentQty { get; set; }
-        public object currentCost { get; set; }
-        public object currentComm { get; set; }
-        public object realisedCost { get; set; }
-        public object unrealisedCost { get; set; }
-        public object grossOpenCost { get; set; }
-        public object grossOpenPremium { get; set; }
-        public object grossExecCost { get; set; }
-        public object isOpen { get; set; }
-        public object markPrice { get; set; }
-        public object markValue { get; set; }
-        public object riskValue { get; set; }
-        public object homeNotional { get; set; }
-        public object foreignNotional { get; set; }
-        public object posState { get; set; }
-        public object posCost { get; set; }
-        public object posCost2 { get; set; }
-        public object posCross { get; set; }
-        public object posInit { get; set; }
-        public object posComm { get; set; }
-        public object posLoss { get; set; }
-        public object posMargin { get; set; }
-        public object posMaint { get; set; }
-        public object posAllowance { get; set; }
-        public object taxableMargin { get; set; }
-        public object initMargin { get; set; }
-        public object maintMargin { get; set; }
-        public object sessionMargin { get; set; }
-        public object targetExcessMargin { get; set; }
-        public object varMargin { get; set; }
-        public object realisedGrossPnl { get; set; }
-        public object realisedTax { get; set; }
-        public object realisedPnl { get; set; }
-        public object unrealisedGrossPnl { get; set; }
-        public object longBankrupt { get; set; }
-        public object shortBankrupt { get; set; }
-        public object taxBase { get; set; }
-        public object indicativeTaxRate { get; set; }
-        public object indicativeTax { get; set; }
-        public object unrealisedTax { get; set; }
-        public object unrealisedPnl { get; set; }
-        public object unrealisedPnlPcnt { get; set; }
-        public object unrealisedRoePcnt { get; set; }
-        public object simpleQty { get; set; }
-        public object simpleCost { get; set; }
-        public object simpleValue { get; set; }
-        public object simplePnl { get; set; }
-        public object simplePnlPcnt { get; set; }
-        public object avgCostPrice { get; set; }
-        public object avgEntryPrice { get; set; }
-        public object breakEvenPrice { get; set; }
-        public object marginCallPrice { get; set; }
-        public object liquidationPrice { get; set; }
-        public object bankruptPrice { get; set; }
-        public object timestamp { get; set; }
-        public object lastPrice { get; set; }
-        public object lastValue { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long Account { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("underlying")]
+        public string Underlying { get; set; }
+        [DataMember]
+        [JsonProperty("quoteCurrency")]
+        public string QuoteCurrency { get; set; }
+        [DataMember]
+        [JsonProperty("commission")]
+        public double? Commission { get; set; }
+        [DataMember]
+        [JsonProperty("initMarginReq")]
+        public double? InitMarginReq { get; set; }
+        [DataMember]
+        [JsonProperty("maintMarginReq")]
+        public double? MaintMarginReq { get; set; }
+        [DataMember]
+        [JsonProperty("riskLimit")]
+        public long? RiskLimit { get; set; }
+        [DataMember]
+        [JsonProperty("leverage")]
+        public double? Leverage { get; set; }
+        [DataMember]
+        [JsonProperty("crossMargin")]
+        public bool CrossMargin { get; set; }
+        [DataMember]
+        [JsonProperty("deleveragePercentile")]
+        public double? DeleveragePercentile { get; set; }
+        [DataMember]
+        [JsonProperty("rebalancedPnl")]
+        public long? RebalancedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("prevRealisedPnl")]
+        public long? PrevRealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("prevUnrealisedPnl")]
+        public long? PrevUnrealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("prevClosePrice")]
+        public double? PrevClosePrice { get; set; }
+        [DataMember]
+        [JsonProperty("openingTimestamp")]
+        public DateTimeOffset? OpeningTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("openingQty")]
+        public long? OpeningQty { get; set; }
+        [DataMember]
+        [JsonProperty("openingCost")]
+        public long? OpeningCost { get; set; }
+        [DataMember]
+        [JsonProperty("openingComm")]
+        public long? OpeningComm { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderBuyQty")]
+        public long? OpenOrderBuyQty { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderBuyCost")]
+        public long? OpenOrderBuyCost { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderBuyPremium")]
+        public long? OpenOrderBuyPremium { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderSellQty")]
+        public long? OpenOrderSellQty { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderSellCost")]
+        public long? OpenOrderSellCost { get; set; }
+        [DataMember]
+        [JsonProperty("openOrderSellPremium")]
+        public long? OpenOrderSellPremium { get; set; }
+        [DataMember]
+        [JsonProperty("execBuyQty")]
+        public long? ExecBuyQty { get; set; }
+        [DataMember]
+        [JsonProperty("execBuyCost")]
+        public long? ExecBuyCost { get; set; }
+        [DataMember]
+        [JsonProperty("execSellQty")]
+        public long? ExecSellQty { get; set; }
+        [DataMember]
+        [JsonProperty("execSellCost")]
+        public long? ExecSellCost { get; set; }
+        [DataMember]
+        [JsonProperty("execQty")]
+        public long? ExecQty { get; set; }
+        [DataMember]
+        [JsonProperty("execCost")]
+        public long? ExecCost { get; set; }
+        [DataMember]
+        [JsonProperty("execComm")]
+        public long? ExecComm { get; set; }
+        [DataMember]
+        [JsonProperty("currentTimestamp")]
+        public DateTimeOffset? CurrentTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("currentQty")]
+        public long? CurrentQty { get; set; }
+        [DataMember]
+        [JsonProperty("currentCost")]
+        public long? CurrentCost { get; set; }
+        [DataMember]
+        [JsonProperty("currentComm")]
+        public long? CurrentComm { get; set; }
+        [DataMember]
+        [JsonProperty("realisedCost")]
+        public long? RealisedCost { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedCost")]
+        public long? UnrealisedCost { get; set; }
+        [DataMember]
+        [JsonProperty("grossOpenCost")]
+        public long? GrossOpenCost { get; set; }
+        [DataMember]
+        [JsonProperty("grossOpenPremium")]
+        public long? GrossOpenPremium { get; set; }
+        [DataMember]
+        [JsonProperty("grossExecCost")]
+        public long? GrossExecCost { get; set; }
+        [DataMember]
+        [JsonProperty("isOpen")]
+        public bool IsOpen { get; set; }
+        [DataMember]
+        [JsonProperty("markPrice")]
+        public double? MarkPrice { get; set; }
+        [DataMember]
+        [JsonProperty("markValue")]
+        public long? MarkValue { get; set; }
+        [DataMember]
+        [JsonProperty("riskValue")]
+        public long? RiskValue { get; set; }
+        [DataMember]
+        [JsonProperty("homeNotional")]
+        public double? HomeNotional { get; set; }
+        [DataMember]
+        [JsonProperty("foreignNotional")]
+        public double? ForeignNotional { get; set; }
+        [DataMember]
+        [JsonProperty("posState")]
+        public string PosState { get; set; }
+        [DataMember]
+        [JsonProperty("posCost")]
+        public long? PosCost { get; set; }
+        [DataMember]
+        [JsonProperty("posCost2")]
+        public long? PosCost2 { get; set; }
+        [DataMember]
+        [JsonProperty("posCross")]
+        public long? PosCross { get; set; }
+        [DataMember]
+        [JsonProperty("posInit")]
+        public long? PosInit { get; set; }
+        [DataMember]
+        [JsonProperty("posComm")]
+        public long? PosComm { get; set; }
+        [DataMember]
+        [JsonProperty("posLoss")]
+        public long? PosLoss { get; set; }
+        [DataMember]
+        [JsonProperty("posMargin")]
+        public long? PosMargin { get; set; }
+        [DataMember]
+        [JsonProperty("posMaint")]
+        public long? PosMaint { get; set; }
+        [DataMember]
+        [JsonProperty("posAllowance")]
+        public long? PosAllowance { get; set; }
+        [DataMember]
+        [JsonProperty("taxableMargin")]
+        public long? TaxableMargin { get; set; }
+        [DataMember]
+        [JsonProperty("initMargin")]
+        public long? InitMargin { get; set; }
+        [DataMember]
+        [JsonProperty("maintMargin")]
+        public long? MaintMargin { get; set; }
+        [DataMember]
+        [JsonProperty("sessionMargin")]
+        public long? SessionMargin { get; set; }
+        [DataMember]
+        [JsonProperty("targetExcessMargin")]
+        public long? TargetExcessMargin { get; set; }
+        [DataMember]
+        [JsonProperty("varMargin")]
+        public long? VarMargin { get; set; }
+        [DataMember]
+        [JsonProperty("realisedGrossPnl")]
+        public long? RealisedGrossPnl { get; set; }
+        [DataMember]
+        [JsonProperty("realisedTax")]
+        public long? RealisedTax { get; set; }
+        [DataMember]
+        [JsonProperty("realisedPnl")]
+        public long? RealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedGrossPnl")]
+        public long? UnrealisedGrossPnl { get; set; }
+        [DataMember]
+        [JsonProperty("longBankrupt")]
+        public long? LongBankrupt { get; set; }
+        [DataMember]
+        [JsonProperty("shortBankrupt")]
+        public long? ShortBankrupt { get; set; }
+        [DataMember]
+        [JsonProperty("taxBase")]
+        public long? TaxBase { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeTaxRate")]
+        public double? IndicativeTaxRate { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeTax")]
+        public long? IndicativeTax { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedTax")]
+        public long? UnrealisedTax { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedPnl")]
+        public long? UnrealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedPnlPcnt")]
+        public double? UnrealisedPnlPcnt { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedRoePcnt")]
+        public double? UnrealisedRoePcnt { get; set; }
+        [DataMember]
+        [JsonProperty("simpleQty")]
+        public double? SimpleQty { get; set; }
+        [DataMember]
+        [JsonProperty("simpleCost")]
+        public double? SimpleCost { get; set; }
+        [DataMember]
+        [JsonProperty("simpleValue")]
+        public double? SimpleValue { get; set; }
+        [DataMember]
+        [JsonProperty("simplePnl")]
+        public double? SimplePnl { get; set; }
+        [DataMember]
+        [JsonProperty("simplePnlPcnt")]
+        public double? SimplePnlPcnt { get; set; }
+        [DataMember]
+        [JsonProperty("avgCostPrice")]
+        public double? AvgCostPrice { get; set; }
+        [DataMember]
+        [JsonProperty("avgEntryPrice")]
+        public double? AvgEntryPrice { get; set; }
+        [DataMember]
+        [JsonProperty("breakEvenPrice")]
+        public double? BreakEvenPrice { get; set; }
+        [DataMember]
+        [JsonProperty("marginCallPrice")]
+        public double? MarginCallPrice { get; set; }
+        [DataMember]
+        [JsonProperty("liquidationPrice")]
+        public double? LiquidationPrice { get; set; }
+        [DataMember]
+        [JsonProperty("bankruptPrice")]
+        public double? BankruptPrice { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("lastPrice")]
+        public double? LastPrice { get; set; }
+        [DataMember]
+        [JsonProperty("lastValue")]
+        public long? LastValue { get; set; }
     }
+    [DataContract]
     public partial class Quote
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object bidSize { get; set; }
-        public object bidPrice { get; set; }
-        public object askPrice { get; set; }
-        public object askSize { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("bidSize")]
+        public long? BidSize { get; set; }
+        [DataMember]
+        [JsonProperty("bidPrice")]
+        public double? BidPrice { get; set; }
+        [DataMember]
+        [JsonProperty("askPrice")]
+        public double? AskPrice { get; set; }
+        [DataMember]
+        [JsonProperty("askSize")]
+        public long? AskSize { get; set; }
     }
+    [DataContract]
     public partial class Settlement
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object settlementType { get; set; }
-        public object settledPrice { get; set; }
-        public object optionStrikePrice { get; set; }
-        public object optionUnderlyingPrice { get; set; }
-        public object bankrupt { get; set; }
-        public object taxBase { get; set; }
-        public object taxRate { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("settlementType")]
+        public string SettlementType { get; set; }
+        [DataMember]
+        [JsonProperty("settledPrice")]
+        public double? SettledPrice { get; set; }
+        [DataMember]
+        [JsonProperty("bankrupt")]
+        public long? Bankrupt { get; set; }
+        [DataMember]
+        [JsonProperty("taxBase")]
+        public long? TaxBase { get; set; }
+        [DataMember]
+        [JsonProperty("taxRate")]
+        public double? TaxRate { get; set; }
     }
+    [DataContract]
     public partial class Stats
     {
-        public object rootSymbol { get; set; }
-        public object currency { get; set; }
-        public object volume24h { get; set; }
-        public object turnover24h { get; set; }
-        public object openInterest { get; set; }
-        public object openValue { get; set; }
+        [DataMember]
+        [JsonProperty("rootSymbol")]
+        public string RootSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("volume24h")]
+        public long? Volume24h { get; set; }
+        [DataMember]
+        [JsonProperty("turnover24h")]
+        public long? Turnover24h { get; set; }
+        [DataMember]
+        [JsonProperty("openInterest")]
+        public long? OpenInterest { get; set; }
+        [DataMember]
+        [JsonProperty("openValue")]
+        public long? OpenValue { get; set; }
     }
+    [DataContract]
     public partial class StatsHistory
     {
-        public object date { get; set; }
-        public object rootSymbol { get; set; }
-        public object currency { get; set; }
-        public object volume { get; set; }
-        public object turnover { get; set; }
+        [DataMember]
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; set; }
+        [DataMember]
+        [JsonProperty("rootSymbol")]
+        public string RootSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("volume")]
+        public long? Volume { get; set; }
+        [DataMember]
+        [JsonProperty("turnover")]
+        public long? Turnover { get; set; }
     }
+    [DataContract]
     public partial class StatsUSD
     {
-        public object rootSymbol { get; set; }
-        public object currency { get; set; }
-        public object turnover24h { get; set; }
-        public object turnover30d { get; set; }
-        public object turnover365d { get; set; }
-        public object turnover { get; set; }
+        [DataMember]
+        [JsonProperty("rootSymbol")]
+        public string RootSymbol { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("turnover24h")]
+        public long? Turnover24h { get; set; }
+        [DataMember]
+        [JsonProperty("turnover30d")]
+        public long? Turnover30d { get; set; }
+        [DataMember]
+        [JsonProperty("turnover365d")]
+        public long? Turnover365d { get; set; }
+        [DataMember]
+        [JsonProperty("turnover")]
+        public long? Turnover { get; set; }
     }
+    [DataContract]
     public partial class Trade
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object side { get; set; }
-        public object size { get; set; }
-        public object price { get; set; }
-        public object tickDirection { get; set; }
-        public object trdMatchID { get; set; }
-        public object grossValue { get; set; }
-        public object homeNotional { get; set; }
-        public object foreignNotional { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("side")]
+        public string Side { get; set; }
+        [DataMember]
+        [JsonProperty("size")]
+        public long? Size { get; set; }
+        [DataMember]
+        [JsonProperty("price")]
+        public double? Price { get; set; }
+        [DataMember]
+        [JsonProperty("tickDirection")]
+        public string TickDirection { get; set; }
+        [DataMember]
+        [JsonProperty("trdMatchID")]
+        public Guid? TrdMatchID { get; set; }
+        [DataMember]
+        [JsonProperty("grossValue")]
+        public long? GrossValue { get; set; }
+        [DataMember]
+        [JsonProperty("homeNotional")]
+        public double? HomeNotional { get; set; }
+        [DataMember]
+        [JsonProperty("foreignNotional")]
+        public double? ForeignNotional { get; set; }
     }
+    [DataContract]
     public partial class TradeBin
     {
-        public object timestamp { get; set; }
-        public object symbol { get; set; }
-        public object open { get; set; }
-        public object high { get; set; }
-        public object low { get; set; }
-        public object close { get; set; }
-        public object trades { get; set; }
-        public object volume { get; set; }
-        public object vwap { get; set; }
-        public object lastSize { get; set; }
-        public object turnover { get; set; }
-        public object homeNotional { get; set; }
-        public object foreignNotional { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [DataMember]
+        [JsonProperty("open")]
+        public double? Open { get; set; }
+        [DataMember]
+        [JsonProperty("high")]
+        public double? High { get; set; }
+        [DataMember]
+        [JsonProperty("low")]
+        public double? Low { get; set; }
+        [DataMember]
+        [JsonProperty("close")]
+        public double? Close { get; set; }
+        [DataMember]
+        [JsonProperty("trades")]
+        public long? Trades { get; set; }
+        [DataMember]
+        [JsonProperty("volume")]
+        public long? Volume { get; set; }
+        [DataMember]
+        [JsonProperty("vwap")]
+        public double? Vwap { get; set; }
+        [DataMember]
+        [JsonProperty("lastSize")]
+        public long? LastSize { get; set; }
+        [DataMember]
+        [JsonProperty("turnover")]
+        public long? Turnover { get; set; }
+        [DataMember]
+        [JsonProperty("homeNotional")]
+        public double? HomeNotional { get; set; }
+        [DataMember]
+        [JsonProperty("foreignNotional")]
+        public double? ForeignNotional { get; set; }
     }
+    [DataContract]
     public partial class Wallet
     {
-        public object account { get; set; }
-        public object currency { get; set; }
-        public object prevDeposited { get; set; }
-        public object prevWithdrawn { get; set; }
-        public object prevTransferIn { get; set; }
-        public object prevTransferOut { get; set; }
-        public object prevAmount { get; set; }
-        public object prevTimestamp { get; set; }
-        public object deltaDeposited { get; set; }
-        public object deltaWithdrawn { get; set; }
-        public object deltaTransferIn { get; set; }
-        public object deltaTransferOut { get; set; }
-        public object deltaAmount { get; set; }
-        public object deposited { get; set; }
-        public object withdrawn { get; set; }
-        public object transferIn { get; set; }
-        public object transferOut { get; set; }
-        public object amount { get; set; }
-        public object pendingCredit { get; set; }
-        public object pendingDebit { get; set; }
-        public object confirmedDebit { get; set; }
-        public object timestamp { get; set; }
-        public object addr { get; set; }
-        public object script { get; set; }
-        public object withdrawalLock { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long Account { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("prevDeposited")]
+        public long? PrevDeposited { get; set; }
+        [DataMember]
+        [JsonProperty("prevWithdrawn")]
+        public long? PrevWithdrawn { get; set; }
+        [DataMember]
+        [JsonProperty("prevTransferIn")]
+        public long? PrevTransferIn { get; set; }
+        [DataMember]
+        [JsonProperty("prevTransferOut")]
+        public long? PrevTransferOut { get; set; }
+        [DataMember]
+        [JsonProperty("prevAmount")]
+        public long? PrevAmount { get; set; }
+        [DataMember]
+        [JsonProperty("prevTimestamp")]
+        public DateTimeOffset? PrevTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("deltaDeposited")]
+        public long? DeltaDeposited { get; set; }
+        [DataMember]
+        [JsonProperty("deltaWithdrawn")]
+        public long? DeltaWithdrawn { get; set; }
+        [DataMember]
+        [JsonProperty("deltaTransferIn")]
+        public long? DeltaTransferIn { get; set; }
+        [DataMember]
+        [JsonProperty("deltaTransferOut")]
+        public long? DeltaTransferOut { get; set; }
+        [DataMember]
+        [JsonProperty("deltaAmount")]
+        public long? DeltaAmount { get; set; }
+        [DataMember]
+        [JsonProperty("deposited")]
+        public long? Deposited { get; set; }
+        [DataMember]
+        [JsonProperty("withdrawn")]
+        public long? Withdrawn { get; set; }
+        [DataMember]
+        [JsonProperty("transferIn")]
+        public long? TransferIn { get; set; }
+        [DataMember]
+        [JsonProperty("transferOut")]
+        public long? TransferOut { get; set; }
+        [DataMember]
+        [JsonProperty("amount")]
+        public long? Amount { get; set; }
+        [DataMember]
+        [JsonProperty("pendingCredit")]
+        public long? PendingCredit { get; set; }
+        [DataMember]
+        [JsonProperty("pendingDebit")]
+        public long? PendingDebit { get; set; }
+        [DataMember]
+        [JsonProperty("confirmedDebit")]
+        public long? ConfirmedDebit { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("addr")]
+        public string Addr { get; set; }
+        [DataMember]
+        [JsonProperty("script")]
+        public string Script { get; set; }
+        [DataMember]
+        [JsonProperty("withdrawalLock")]
+        public string[] WithdrawalLock { get; set; }
     }
+    [DataContract]
     public partial class Transaction
     {
-        public object transactID { get; set; }
-        public object account { get; set; }
-        public object currency { get; set; }
-        public object transactType { get; set; }
-        public object amount { get; set; }
-        public object fee { get; set; }
-        public object transactStatus { get; set; }
-        public object address { get; set; }
-        public object tx { get; set; }
-        public object text { get; set; }
-        public object transactTime { get; set; }
-        public object timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("transactID")]
+        public Guid TransactID { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long? Account { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("transactType")]
+        public string TransactType { get; set; }
+        [DataMember]
+        [JsonProperty("amount")]
+        public long? Amount { get; set; }
+        [DataMember]
+        [JsonProperty("fee")]
+        public long? Fee { get; set; }
+        [DataMember]
+        [JsonProperty("transactStatus")]
+        public string TransactStatus { get; set; }
+        [DataMember]
+        [JsonProperty("address")]
+        public string Address { get; set; }
+        [DataMember]
+        [JsonProperty("tx")]
+        public string Tx { get; set; }
+        [DataMember]
+        [JsonProperty("text")]
+        public string Text { get; set; }
+        [DataMember]
+        [JsonProperty("transactTime")]
+        public DateTimeOffset? TransactTime { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
     }
+    [DataContract]
     public partial class AccessToken
     {
-        public object id { get; set; }
-        public object ttl { get; set; }
-        public object created { get; set; }
-        public object userId { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public string Id { get; set; }
+        [DataMember]
+        [JsonProperty("ttl")]
+        public double? Ttl { get; set; }
+        [DataMember]
+        [JsonProperty("created")]
+        public DateTimeOffset? Created { get; set; }
+        [DataMember]
+        [JsonProperty("userId")]
+        public double? UserId { get; set; }
     }
+    [DataContract]
     public partial class Affiliate
     {
-        public object account { get; set; }
-        public object currency { get; set; }
-        public object prevPayout { get; set; }
-        public object prevTurnover { get; set; }
-        public object prevComm { get; set; }
-        public object prevTimestamp { get; set; }
-        public object execTurnover { get; set; }
-        public object execComm { get; set; }
-        public object totalReferrals { get; set; }
-        public object totalTurnover { get; set; }
-        public object totalComm { get; set; }
-        public object payoutPcnt { get; set; }
-        public object pendingPayout { get; set; }
-        public object timestamp { get; set; }
-        public object referrerAccount { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long Account { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("prevPayout")]
+        public long? PrevPayout { get; set; }
+        [DataMember]
+        [JsonProperty("prevTurnover")]
+        public long? PrevTurnover { get; set; }
+        [DataMember]
+        [JsonProperty("prevComm")]
+        public long? PrevComm { get; set; }
+        [DataMember]
+        [JsonProperty("prevTimestamp")]
+        public DateTimeOffset? PrevTimestamp { get; set; }
+        [DataMember]
+        [JsonProperty("execTurnover")]
+        public long? ExecTurnover { get; set; }
+        [DataMember]
+        [JsonProperty("execComm")]
+        public long? ExecComm { get; set; }
+        [DataMember]
+        [JsonProperty("totalReferrals")]
+        public long? TotalReferrals { get; set; }
+        [DataMember]
+        [JsonProperty("totalTurnover")]
+        public long? TotalTurnover { get; set; }
+        [DataMember]
+        [JsonProperty("totalComm")]
+        public long? TotalComm { get; set; }
+        [DataMember]
+        [JsonProperty("payoutPcnt")]
+        public double? PayoutPcnt { get; set; }
+        [DataMember]
+        [JsonProperty("pendingPayout")]
+        public long? PendingPayout { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("referrerAccount")]
+        public double? ReferrerAccount { get; set; }
     }
+    [DataContract]
     public partial class User
     {
-        public object id { get; set; }
-        public object ownerId { get; set; }
-        public object firstname { get; set; }
-        public object lastname { get; set; }
-        public object username { get; set; }
-        public object email { get; set; }
-        public object phone { get; set; }
-        public object created { get; set; }
-        public object lastUpdated { get; set; }
-        public object preferences { get; set; }
-        public object TFAEnabled { get; set; }
-        public object affiliateID { get; set; }
-        public object pgpPubKey { get; set; }
-        public object country { get; set; }
+        [DataMember]
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+        [DataMember]
+        [JsonProperty("ownerId")]
+        public int? OwnerId { get; set; }
+        [DataMember]
+        [JsonProperty("firstname")]
+        public string Firstname { get; set; }
+        [DataMember]
+        [JsonProperty("lastname")]
+        public string Lastname { get; set; }
+        [DataMember]
+        [JsonProperty("username")]
+        public string Username { get; set; }
+        [DataMember]
+        [JsonProperty("email")]
+        public string Email { get; set; }
+        [DataMember]
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
+        [DataMember]
+        [JsonProperty("created")]
+        public DateTimeOffset? Created { get; set; }
+        [DataMember]
+        [JsonProperty("lastUpdated")]
+        public DateTimeOffset? LastUpdated { get; set; }
+        // TODO:  
+        [DataMember]
+        [JsonProperty("preferences")]
+        public object Preferences { get; set; }
+        [DataMember]
+        [JsonProperty("TFAEnabled")]
+        public string IsTfaEnabled { get; set; }
+        [DataMember]
+        [JsonProperty("affiliateID")]
+        public string AffiliateID { get; set; }
+        [DataMember]
+        [JsonProperty("pgpPubKey")]
+        public string PgpPubKey { get; set; }
+        [DataMember]
+        [JsonProperty("country")]
+        public string Country { get; set; }
     }
+    [DataContract]
     public partial class UserCommission
     {
-        public object makerFee { get; set; }
-        public object takerFee { get; set; }
-        public object settlementFee { get; set; }
-        public object maxFee { get; set; }
+        [DataMember]
+        [JsonProperty("makerFee")]
+        public double? MakerFee { get; set; }
+        [DataMember]
+        [JsonProperty("takerFee")]
+        public double? TakerFee { get; set; }
+        [DataMember]
+        [JsonProperty("settlementFee")]
+        public double? SettlementFee { get; set; }
+        [DataMember]
+        [JsonProperty("maxFee")]
+        public double? MaxFee { get; set; }
     }
+    [DataContract]
     public partial class Margin
     {
-        public object account { get; set; }
-        public object currency { get; set; }
-        public object riskLimit { get; set; }
-        public object prevState { get; set; }
-        public object state { get; set; }
-        public object action { get; set; }
-        public object amount { get; set; }
-        public object pendingCredit { get; set; }
-        public object pendingDebit { get; set; }
-        public object confirmedDebit { get; set; }
-        public object prevRealisedPnl { get; set; }
-        public object prevUnrealisedPnl { get; set; }
-        public object grossComm { get; set; }
-        public object grossOpenCost { get; set; }
-        public object grossOpenPremium { get; set; }
-        public object grossExecCost { get; set; }
-        public object grossMarkValue { get; set; }
-        public object riskValue { get; set; }
-        public object taxableMargin { get; set; }
-        public object initMargin { get; set; }
-        public object maintMargin { get; set; }
-        public object sessionMargin { get; set; }
-        public object targetExcessMargin { get; set; }
-        public object varMargin { get; set; }
-        public object realisedPnl { get; set; }
-        public object unrealisedPnl { get; set; }
-        public object indicativeTax { get; set; }
-        public object unrealisedProfit { get; set; }
-        public object syntheticMargin { get; set; }
-        public object walletBalance { get; set; }
-        public object marginBalance { get; set; }
-        public object marginBalancePcnt { get; set; }
-        public object marginLeverage { get; set; }
-        public object marginUsedPcnt { get; set; }
-        public object excessMargin { get; set; }
-        public object excessMarginPcnt { get; set; }
-        public object availableMargin { get; set; }
-        public object withdrawableMargin { get; set; }
-        public object timestamp { get; set; }
-        public object grossLastValue { get; set; }
-        public object commission { get; set; }
+        [DataMember]
+        [JsonProperty("account")]
+        public long Account { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("riskLimit")]
+        public long? RiskLimit { get; set; }
+        [DataMember]
+        [JsonProperty("prevState")]
+        public string PrevState { get; set; }
+        [DataMember]
+        [JsonProperty("state")]
+        public string State { get; set; }
+        [DataMember]
+        [JsonProperty("action")]
+        public string Action { get; set; }
+        [DataMember]
+        [JsonProperty("amount")]
+        public long? Amount { get; set; }
+        [DataMember]
+        [JsonProperty("pendingCredit")]
+        public long? PendingCredit { get; set; }
+        [DataMember]
+        [JsonProperty("pendingDebit")]
+        public long? PendingDebit { get; set; }
+        [DataMember]
+        [JsonProperty("confirmedDebit")]
+        public long? ConfirmedDebit { get; set; }
+        [DataMember]
+        [JsonProperty("prevRealisedPnl")]
+        public long? PrevRealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("prevUnrealisedPnl")]
+        public long? PrevUnrealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("grossComm")]
+        public long? GrossComm { get; set; }
+        [DataMember]
+        [JsonProperty("grossOpenCost")]
+        public long? GrossOpenCost { get; set; }
+        [DataMember]
+        [JsonProperty("grossOpenPremium")]
+        public long? GrossOpenPremium { get; set; }
+        [DataMember]
+        [JsonProperty("grossExecCost")]
+        public long? GrossExecCost { get; set; }
+        [DataMember]
+        [JsonProperty("grossMarkValue")]
+        public long? GrossMarkValue { get; set; }
+        [DataMember]
+        [JsonProperty("riskValue")]
+        public long? RiskValue { get; set; }
+        [DataMember]
+        [JsonProperty("taxableMargin")]
+        public long? TaxableMargin { get; set; }
+        [DataMember]
+        [JsonProperty("initMargin")]
+        public long? InitMargin { get; set; }
+        [DataMember]
+        [JsonProperty("maintMargin")]
+        public long? MaintMargin { get; set; }
+        [DataMember]
+        [JsonProperty("sessionMargin")]
+        public long? SessionMargin { get; set; }
+        [DataMember]
+        [JsonProperty("targetExcessMargin")]
+        public long? TargetExcessMargin { get; set; }
+        [DataMember]
+        [JsonProperty("varMargin")]
+        public long? VarMargin { get; set; }
+        [DataMember]
+        [JsonProperty("realisedPnl")]
+        public long? RealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedPnl")]
+        public long? UnrealisedPnl { get; set; }
+        [DataMember]
+        [JsonProperty("indicativeTax")]
+        public long? IndicativeTax { get; set; }
+        [DataMember]
+        [JsonProperty("unrealisedProfit")]
+        public long? UnrealisedProfit { get; set; }
+        [DataMember]
+        [JsonProperty("syntheticMargin")]
+        public long? SyntheticMargin { get; set; }
+        [DataMember]
+        [JsonProperty("walletBalance")]
+        public long? WalletBalance { get; set; }
+        [DataMember]
+        [JsonProperty("marginBalance")]
+        public long? MarginBalance { get; set; }
+        [DataMember]
+        [JsonProperty("marginBalancePcnt")]
+        public double? MarginBalancePcnt { get; set; }
+        [DataMember]
+        [JsonProperty("marginLeverage")]
+        public double? MarginLeverage { get; set; }
+        [DataMember]
+        [JsonProperty("marginUsedPcnt")]
+        public double? MarginUsedPcnt { get; set; }
+        [DataMember]
+        [JsonProperty("excessMargin")]
+        public long? ExcessMargin { get; set; }
+        [DataMember]
+        [JsonProperty("excessMarginPcnt")]
+        public double? ExcessMarginPcnt { get; set; }
+        [DataMember]
+        [JsonProperty("availableMargin")]
+        public long? AvailableMargin { get; set; }
+        [DataMember]
+        [JsonProperty("withdrawableMargin")]
+        public long? WithdrawableMargin { get; set; }
+        [DataMember]
+        [JsonProperty("timestamp")]
+        public DateTimeOffset? Timestamp { get; set; }
+        [DataMember]
+        [JsonProperty("grossLastValue")]
+        public long? GrossLastValue { get; set; }
+        [DataMember]
+        [JsonProperty("commission")]
+        public double? Commission { get; set; }
     }
+    [DataContract]
     public partial class UserPreferences
     {
-        public object alertOnLiquidations { get; set; }
-        public object animationsEnabled { get; set; }
-        public object announcementsLastSeen { get; set; }
-        public object chatChannelID { get; set; }
-        public object colorTheme { get; set; }
-        public object currency { get; set; }
-        public object debug { get; set; }
-        public object disableEmails { get; set; }
-        public object hideConfirmDialogs { get; set; }
-        public object hideConnectionModal { get; set; }
-        public object hideFromLeaderboard { get; set; }
-        public object hideNameFromLeaderboard { get; set; }
-        public object hideNotifications { get; set; }
-        public object locale { get; set; }
-        public object msgsSeen { get; set; }
-        public object orderBookBinning { get; set; }
-        public object orderBookType { get; set; }
-        public object orderClearImmediate { get; set; }
-        public object orderControlsPlusMinus { get; set; }
-        public object showLocaleNumbers { get; set; }
-        public object sounds { get; set; }
-        public object strictIPCheck { get; set; }
-        public object strictTimeout { get; set; }
-        public object tickerGroup { get; set; }
-        public object tickerPinned { get; set; }
-        public object tradeLayout { get; set; }
+        [DataMember]
+        [JsonProperty("alertOnLiquidations")]
+        public bool AlertOnLiquidations { get; set; }
+        [DataMember]
+        [JsonProperty("animationsEnabled")]
+        public bool AnimationsEnabled { get; set; }
+        [DataMember]
+        [JsonProperty("announcementsLastSeen")]
+        public DateTimeOffset? AnnouncementsLastSeen { get; set; }
+        [DataMember]
+        [JsonProperty("chatChannelID")]
+        public double? ChatChannelID { get; set; }
+        [DataMember]
+        [JsonProperty("colorTheme")]
+        public string ColorTheme { get; set; }
+        [DataMember]
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+        [DataMember]
+        [JsonProperty("debug")]
+        public bool Debug { get; set; }
+        [DataMember]
+        [JsonProperty("disableEmails")]
+        public string[] DisableEmails { get; set; }
+        [DataMember]
+        [JsonProperty("hideConfirmDialogs")]
+        public string[] HideConfirmDialogs { get; set; }
+        [DataMember]
+        [JsonProperty("hideConnectionModal")]
+        public bool HideConnectionModal { get; set; }
+        [DataMember]
+        [JsonProperty("hideFromLeaderboard")]
+        public bool HideFromLeaderboard { get; set; }
+        [DataMember]
+        [JsonProperty("hideNameFromLeaderboard")]
+        public bool HideNameFromLeaderboard { get; set; }
+        [DataMember]
+        [JsonProperty("hideNotifications")]
+        public string[] HideNotifications { get; set; }
+        [DataMember]
+        [JsonProperty("locale")]
+        public string Locale { get; set; }
+        [DataMember]
+        [JsonProperty("msgsSeen")]
+        public string[] MsgsSeen { get; set; }
+        [DataMember]
+        [JsonProperty("orderBookBinning")]
+        public object OrderBookBinning { get; set; }
+        [DataMember]
+        [JsonProperty("orderBookType")]
+        public string OrderBookType { get; set; }
+        [DataMember]
+        [JsonProperty("orderClearImmediate")]
+        public bool OrderClearImmediate { get; set; }
+        [DataMember]
+        [JsonProperty("orderControlsPlusMinus")]
+        public bool OrderControlsPlusMinus { get; set; }
+        [DataMember]
+        [JsonProperty("showLocaleNumbers")]
+        public bool ShowLocaleNumbers { get; set; }
+        [DataMember]
+        [JsonProperty("sounds")]
+        public string[] Sounds { get; set; }
+        [DataMember]
+        [JsonProperty("strictIPCheck")]
+        public bool StrictIPCheck { get; set; }
+        [DataMember]
+        [JsonProperty("strictTimeout")]
+        public bool StrictTimeout { get; set; }
+        [DataMember]
+        [JsonProperty("tickerGroup")]
+        public string TickerGroup { get; set; }
+        [DataMember]
+        [JsonProperty("tickerPinned")]
+        public bool TickerPinned { get; set; }
+        [DataMember]
+        [JsonProperty("tradeLayout")]
+        public string TradeLayout { get; set; }
+    }
+    [DataContract]
+    public enum NotificationType
+    {
+        [EnumMember(Value = "success")]
+        Success,
+        [EnumMember(Value = "error")]
+        Error,
+        [EnumMember(Value = "info")]
+        Info,
     }
 }
