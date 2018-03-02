@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BitMex", "Shipwreck.BitMex\Shipwreck.BitMex.csproj", "{23D96466-A4BB-41DD-AC95-0C189C9A4ED3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BitMex", "Shipwreck.BitMex\Shipwreck.BitMex.csproj", "{23D96466-A4BB-41DD-AC95-0C189C9A4ED3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{4A60B6C0-095C-4C76-8AAB-1741014D84F2}"
+	ProjectSection(SolutionItems) = preProject
+		..\swagger.json = ..\swagger.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BitMex.CodeGeneration", "Shipwreck.BitMex.CodeGeneration\Shipwreck.BitMex.CodeGeneration.csproj", "{5801835A-3F07-4704-8BA0-42FF63846076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{23D96466-A4BB-41DD-AC95-0C189C9A4ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23D96466-A4BB-41DD-AC95-0C189C9A4ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23D96466-A4BB-41DD-AC95-0C189C9A4ED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5801835A-3F07-4704-8BA0-42FF63846076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5801835A-3F07-4704-8BA0-42FF63846076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5801835A-3F07-4704-8BA0-42FF63846076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5801835A-3F07-4704-8BA0-42FF63846076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

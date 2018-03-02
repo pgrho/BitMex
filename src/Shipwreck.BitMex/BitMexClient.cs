@@ -1,13 +1,18 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Shipwreck.BitMex
 {
-    public class BitMexClient
+    public partial class BitMexClient
     {
         public Uri BaseUrl = new Uri("https://www.bitmex.com/api/v1/");
 
@@ -40,33 +45,97 @@ namespace Shipwreck.BitMex
 
         #endregion ApiSecret
 
-        protected void Send(HttpMethod method, string path)
+        #region SendAsync
+
+        protected Task<T> GetAsync<T>(string path, bool shouldAuthorize = true)
+            => SendAsync<T>(HttpMethod.Get, path, shouldAuthorize: shouldAuthorize);
+
+        protected Task<T> SendAsync<T>(HttpMethod method, string path, bool shouldAuthorize = true)
         {
             var u = new Uri(BaseUrl, path);
 
             var m = new HttpRequestMessage(method, u);
-            var nonce = Interlocked.Increment(ref _Nonce).ToString();
-
             m.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            m.Headers.Add("api-nonce", nonce);
-            m.Headers.Add("api-key", ApiKey);
-            m.Headers.Add("api-signature", GetSignature(m.Method.Method + u.AbsolutePath + nonce));
+            if (shouldAuthorize)
+            {
+                var nonce = Interlocked.Increment(ref _Nonce).ToString();
+
+                m.Headers.Add("api-nonce", nonce);
+                m.Headers.Add("api-key", ApiKey);
+                m.Headers.Add("api-signature", GetSignature(m.Method.Method + u.AbsolutePath + nonce));
+            }
+
+            return SendAsyncCore<T>(m);
         }
 
-        protected void Send(HttpMethod method, string path, string payload, bool isJson = false)
+        protected Task<T> SendAsync<T>(HttpMethod method, string path, string payload, bool shouldAuthorize = true, bool isJson = false)
         {
             var u = new Uri(BaseUrl, path);
 
             var m = new HttpRequestMessage(method, u);
-            var nonce = Interlocked.Increment(ref _Nonce).ToString();
 
-            m.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            m.Headers.Add("api-nonce", nonce);
-            m.Headers.Add("api-key", ApiKey);
-            m.Headers.Add("api-signature", GetSignature(m.Method.Method + u.AbsolutePath + nonce + payload));
+            if (shouldAuthorize)
+            {
+                var nonce = Interlocked.Increment(ref _Nonce).ToString();
 
+                m.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                m.Headers.Add("api-nonce", nonce);
+                m.Headers.Add("api-key", ApiKey);
+                m.Headers.Add("api-signature", GetSignature(m.Method.Method + u.AbsolutePath + nonce + payload));
+            }
             m.Content = new StringContent(payload, Encoding.UTF8, isJson ? "application/json" : "application/x-www-form-urlencoded");
+
+            return SendAsyncCore<T>(m);
         }
+
+        private async Task<T> SendAsyncCore<T>(HttpRequestMessage message)
+        {
+            HttpResponseMessage res = null;
+            try
+            {
+                using (var hc = new HttpClient())
+                {
+                    res = await hc.SendAsync(message).ConfigureAwait(false);
+
+                    if (res.Content.Headers.ContentType?.MediaType == "application/json")
+                    {
+                        using (var s = await res.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                        using (var sr = new StreamReader(s, Encoding.UTF8))
+                        using (var jr = new JsonTextReader(sr))
+                        {
+                            if (res.IsSuccessStatusCode)
+                            {
+                                return new JsonSerializer().Deserialize<T>(jr);
+                            }
+                            else
+                            {
+                                ErrorResponse e;
+                                try
+                                {
+                                    e = new JsonSerializer().Deserialize<ErrorResponse>(jr);
+                                }
+                                catch
+                                {
+                                    e = null;
+                                }
+
+                                if (e != null)
+                                {
+                                    throw new BitMexException(e);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BitMexException("An exception thrown while request.", ex);
+            }
+            throw new BitMexException(res);
+        }
+
+        #endregion SendAsync
 
         private string GetSignature(string message)
         {
